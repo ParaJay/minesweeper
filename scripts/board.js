@@ -109,8 +109,6 @@ export class Board {
     }
 
     unflag(x, y) {
-        let index = -1;
-
         for(let i = 0; i < this.flags.length; i++) {
             let flag = this.flags[i];
 
