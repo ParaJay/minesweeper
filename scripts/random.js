@@ -4,6 +4,13 @@ export class Random {
     }
 
     nextInt(int) {
-        return Math.floor(Math.random() * (int - 1)) + 1;
+        return this.randint(0, int);
+    }
+
+    randint(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+    
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 }
