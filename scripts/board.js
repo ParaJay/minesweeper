@@ -226,23 +226,32 @@ export class Board {
     }
 
     #renderSquares() {
-        //todo: change to fit minesweeper prof
         for(let i = 0 ; i < this.width; i++) {
             for(let j = 0; j < this.height; j++) {
                 let space = this.#board[i][j];
                 let colour = "gray";
+                let image = null;
 
                 if(this.isFlagged(i, j)) {
-                    colour = "red";
+                    image = this.main.flagImage;
                 } else {
-                    if(space == "*" && this.main.over) {
-                        colour = "black";
+                    if(space == "*") {
+                        if(this.main.over) {
+                            image = this.main.bombImage;
+                        }
                     } else if(space == " ") {
                         colour = "white";
                     }
                 }
-
+                
                 this.renderer.fill(i * this.ws, j * this.hs, this.ws, this.hs, colour);
+
+                if(image) {
+                    this.context.beginPath();
+                    this.context.drawImage(image, i * this.ws, j * this.hs, this.ws, this.hs);
+                    this.context.stroke();
+                    console.log("rendered image");
+                }
 
                 if(colour == "white") {
                     let mines = this.#getConnectedMines(i, j);
