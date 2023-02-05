@@ -16,6 +16,12 @@ export class Main {
     constructor() {
         instance = this;
 
+        this.flagImage = document.createElement("img");
+        this.bombImage = document.createElement("img");
+
+        this.flagImage.src = "./res/flag.png";
+        this.bombImage.src = "./res/bomb.png";
+
         let canvas = document.getElementById("canvas");
 
         this.renderer = new Renderer(canvas);
@@ -27,11 +33,11 @@ export class Main {
             "Extreme": new Board(24, 24, 99)
         }
 
-        let input = "";
+        let input = "Easy";
 
-        while(!(input in boards)) {
-            input = window.prompt("Enter difficulty (Easy, Medium, Hard, Extreme)");
-        }
+        // while(!(input in boards)) {
+        //     input = window.prompt("Enter difficulty (Easy, Medium, Hard, Extreme)");
+        // }
 
         this.board = boards[input];
 
