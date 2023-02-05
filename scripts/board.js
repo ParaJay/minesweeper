@@ -14,7 +14,7 @@ export class Board {
         this.canvas = this.renderer.canvas;
         this.context = this.renderer.context;
         this.ws = this.canvas.width / this.width;
-        this.hs = this.canvas.width / this.height;
+        this.hs = this.canvas.height / this.height;
         this.mines = mines;
         this.flags = [];
 
@@ -61,14 +61,14 @@ export class Board {
         return this.#board[x][y];
     }
     
-    set(x, y, v, c=true) {
+    set(x, y, v) {
         this.#board[x][y] = v;
 
         if(this.#getConnectedMines(x, y) > 0) {
             return;
         }
 
-        if(this.main.started && v == " " && c) {
+        if(this.main.started && v == " ") {
             let neighbours = this.#getNeighboursAsCoords(x, y);
 
             for(let i = 0; i < neighbours.length; i++) {
@@ -82,7 +82,7 @@ export class Board {
                 let xdist = Math.abs(x - neighbour.x);
                 let ydist = Math.abs(y - neighbour.y);
 
-                if((xdist == 1 && ydist == 0) || (xdist == 0 && ydist == 1)) {
+                if(xdist + ydist == 1) {
                     this.set(neighbour.x, neighbour.y, " ");
                 }
             }
