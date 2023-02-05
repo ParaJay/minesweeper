@@ -33,11 +33,11 @@ export class Main {
             "Extreme": new Board(24, 24, 99)
         }
 
-        let input = "Easy";
+        let input = "";
 
-        // while(!(input in boards)) {
-        //     input = window.prompt("Enter difficulty (Easy, Medium, Hard, Extreme)");
-        // }
+        while(!(input in boards)) {
+            input = window.prompt("Enter difficulty (Easy, Medium, Hard, Extreme)");
+        }
 
         this.board = boards[input];
 
