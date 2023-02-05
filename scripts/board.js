@@ -69,7 +69,7 @@ export class Board {
         }
 
         if(this.main.started && v == " ") {
-            let neighbours = this.#getNeighboursAsCoords(x, y);
+            let neighbours = this.#getNeighbours(x, y);
 
             for(let i = 0; i < neighbours.length; i++) {
                 let neighbour = neighbours[i];
@@ -147,7 +147,7 @@ export class Board {
         return false;
     }
 
-    #getNeighboursAsCoords(x, y) {
+    #getNeighbours(x, y) {
         let res = [];
         let neighbours = [];
 
@@ -176,23 +176,16 @@ export class Board {
         return neighbours;
     }
 
-    #getNeighbours(x, y) {
-        let coords = this.#getNeighboursAsCoords(x, y);
-        let neighbours = [];
-
-        for(let i = 0; i < coords.length; i++) {
-            neighbours.push(this.get(coords[i].x, coords[i].y));
-        }
-
-        return neighbours;
-    }
-
     #getConnectedMines(x, y) {
         let neighbours = this.#getNeighbours(x, y);
         let count = 0;
 
         for(let i = 0; i < neighbours.length; i++) {
-            if(neighbours[i] == "*") {
+            let neighbour = neighbours[i];
+
+            let space = this.get(neighbour.x, neighbour.y);
+
+            if(space == "*") {
                 count++;
             }
         }
